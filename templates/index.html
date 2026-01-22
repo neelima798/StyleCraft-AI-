@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StyleCraft AI</title>
+
+    <!-- Luxury Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <h1>StyleCraft</h1>
+        <span>AI FASHION ASSISTANT</span>
+    </div>
+</header>
+
+<main class="hero">
+    <div class="left">
+        <h2>Design your<br><span>next signature look.</span></h2>
+        <p>Transform your creative vision into high-fashion designs using AI.</p>
+
+        <form method="POST" class="form">
+
+            <!-- Target -->
+            <select name="target">
+                <option>Women</option>
+                <option>Men</option>
+                <option>Kids</option>
+            </select>
+
+            <input type="text" name="style" placeholder="Style (e.g. Anarkali, Kurta Set, Party Dress)" required>
+
+            <!-- Presets -->
+            <select name="preset">
+                <option>Traditional</option>
+                <option>Modern</option>
+                <option>Indo-Western</option>
+                <option>Minimalist</option>
+                <option>Vintage</option>
+            </select>
+
+            <!-- Colours (Men + Women + Kids safe) -->
+            <select name="color">
+                <option>Black</option>
+                <option>Ivory</option>
+                <option>Royal Blue</option>
+                <option>Emerald Green</option>
+                <option>Maroon</option>
+                <option>Wine Red</option>
+                <option>Sky Blue</option>
+                <option>Pastel Pink</option>
+                <option>Mustard Yellow</option>
+                <option>Mint Green</option>
+            </select>
+
+            <!-- Fabrics (Men + Kids included) -->
+            <select name="fabric">
+                <option>Silk</option>
+                <option>Cotton</option>
+                <option>Linen</option>
+                <option>Velvet</option>
+                <option>Denim</option>
+                <option>Georgette</option>
+                <option>Organza</option>
+                <option>Brocade</option>
+                <option>Banarasi Silk</option>
+            </select>
+
+            <select name="occasion">
+                <option>Wedding</option>
+                <option>Festival</option>
+                <option>Party</option>
+                <option>College Event</option>
+                <option>Casual Wear</option>
+            </select>
+
+            <button type="submit">Generate Design</button>
+        </form>
+    </div>
+
+    <div class="right">
+        {% if image_path %}
+            <img src="/{{ image_path }}" alt="Fashion Design">
+            <a class="download" href="/{{ image_path }}" download>Download Image</a>
+        {% endif %}
+    </div>
+</main>
+
+</body>
+</html>
