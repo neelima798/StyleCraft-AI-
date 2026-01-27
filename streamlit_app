@@ -1,0 +1,37 @@
+import streamlit as st
+from huggingface_hub import InferenceClient
+import uuid
+
+st.title("StyleCraft AI")
+st.write("AI Fashion Design Assistant")
+
+HF_API_KEY = "YOUR_HF_TOKEN"
+MODEL_ID = "stabilityai/stable-diffusion-xl-base-1.0"
+
+client = InferenceClient(
+    provider="hf-inference",
+    api_key=HF_API_KEY
+)
+
+target = st.selectbox("Select Target", ["Women", "Men", "Kids"])
+style = st.text_input("Style (e.g. Anarkali Dress)")
+color = st.selectbox("Color", ["Black", "Royal Blue", "Emerald Green", "Maroon"])
+fabric = st.selectbox("Fabric", ["Silk", "Cotton", "Velvet", "Organza"])
+occasion = st.selectbox("Occasion", ["Wedding", "Festival", "Party"])
+
+if st.button("Generate Design"):
+    if target == "Women":
+        model_subject = "adult female fashion model"
+    elif target == "Men":
+        model_subject = "adult male fashion model"
+    else:
+        model_subject = "child fashion model"
+
+    prompt = f"""
+    Single full-length {model_subject} wearing an elegant {color} {fabric} {style},
+    suitable for {occasion}, ultra realistic, studio lighting,
+    professional fashion photography, clean background
+    """
+
+    image = client.text_to_image(prompt, model=MODEL_ID)
+    st.image(image, caption="AI Generated Design")
